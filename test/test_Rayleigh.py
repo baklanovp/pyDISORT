@@ -5,6 +5,7 @@ Test of the Python wrapper to the DISORT library
 Module '_disort' is auto-generated with f2py (version:2).
 """
 
+import os
 import numpy as np
 from pylab import plt
 import disort
@@ -13,8 +14,9 @@ import disort
 
 if __name__ == '__main__':
 
+    cwd = os.getcwd()
     # read Rayleigh optical thickness for 325.8 nm [Ozone fitting window]
-    xy     = np.loadtxt('rayleigh_layer_opd.txt')
+    xy     = np.loadtxt(os.path.join(cwd, 'test', 'rayleigh_layer_opd.txt'))
     dTau   = xy[::-1,1]  # FROM TOP TO BOTTOM
     z_atm  = xy[::-1,0]  # last altitude value missing, find in header
     z_atm  = np.insert(z_atm, 0, 120.)
@@ -40,7 +42,7 @@ if __name__ == '__main__':
                                                  utau=uTau, umu=umu, phi=phi, prnt=prnt)
 
     rfltot = rfldir + rfldn
-    print '\n# Energy conservation, R(TOA)+T(BOA)*(1-albedo) ~ 1:  %.3f' % (flup[0] + rfltot[-1]*(1.-albedo))
+    print('\n# Energy conservation, R(TOA)+T(BOA)*(1-albedo) ~ 1:  %.3f' % (flup[0] + rfltot[-1]*(1.-albedo)))
 
     plt.figure()
     plt.plot(rfltot, z_atm)

@@ -190,3 +190,18 @@ See `test` directory.
 
 - These parameters are used as dimensions for array allocation. Allocation
   should be done dynamically
+
+## SETUP
+```
+python setup.py install
+
+```
+
+## RUN
+```
+ipython  #  in the root directory
+import numpy as np
+import disort
+%run test/test_disort.py
+%run test/test_Rayleigh.py
+```
